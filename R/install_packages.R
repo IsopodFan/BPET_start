@@ -19,3 +19,8 @@ packages <- c(
 ## Install the packages
 pak::pak(packages)
 
+pkgbuild::has_build_tools(debug = TRUE)
+
+install.packages("pak", type = "source")
+install.packages("pak", type = "binary")
+install.packages("terra", type = "binary")
