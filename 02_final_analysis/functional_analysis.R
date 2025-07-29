@@ -25,7 +25,7 @@ source("R/utils.R")
 # 2. Load data ------------------------------------------------------------
 
 ## Get Tenerife municipalities
-
+tenerife_muni_sf <- get_tenerife_muni()
 
 ## Convert to list, where each row is an element
 
