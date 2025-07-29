@@ -49,3 +49,44 @@ get_sentinel2_muni <- function(data) {
     rast(sentinel_path) / 10000
     
 }
+
+#FUNCTION: Calculate NDVI 
+calc_ndvi <- function(image) {
+    
+    ## Calculate NDVI
+    ## Formula: NDVI = (N - R) / (N + R)
+    ndvi_sr <- (image$N - image$R) / (image$N + image$R)
+    
+    ## Rename band
+    names(ndvi_sr) <- "NDVI"
+    
+    ## return NDVI
+    ndvi_sr
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
