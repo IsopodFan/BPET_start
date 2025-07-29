@@ -84,11 +84,11 @@ get_sentinel2_muni <- function(data) {
 }
 
 #FUNCTION: Calculate NDVI 
-calc_ndvi <- function(image) {
+calc_ndvi <- function(data) {
     
     ## Calculate NDVI
     ## Formula: NDVI = (N - R) / (N + R)
-    ndvi_sr <- (image$N - image$R) / (image$N + image$R)
+    ndvi_sr <- (data$N - data$R) / (data$N + data$R)
     
     ## Rename band
     names(ndvi_sr) <- "NDVI"
@@ -100,6 +100,37 @@ calc_ndvi <- function(image) {
 
 
 
+#FUNCTION: create map
+create_ndvi_gg <- function(ndvi_sr, muni_sf) {
+    
+    ggplot() + 
+        geom_spatraster( 
+            data = ndvi_sr
+        ) +  
+        geom_sf(
+            data  = muni_sf, 
+            color = "darkblue", 
+            fill  = "transparent", 
+            lwd   = 1
+        ) +
+        scale_fill_gradientn( 
+            colours = hcl.colors(20, "RdYlGn")
+        ) + 
+        labs( 
+            title = str_glue("NDVI in {muni_sf$fixed_names}, Tenerife"),
+            fill  = "NDVI"
+        ) + 
+        theme_void() + 
+        theme( 
+            plot.title = element_text( 
+                face   = "bold", 
+                size   = 14, 
+                family = "Roboto", 
+                hjust  = 0.5
+            )
+        )
+    
+}
 
 
 
